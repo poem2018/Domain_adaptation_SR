@@ -1,0 +1,102 @@
+{
+    "name": "temp", //"4x_ci_nocontrol",//"4x_ci_consis", //   "8xcoco_IXI", //  "4xadamwcoco_IXI",  //"4xcoco_IXI", //  
+    "phase": "train", // train or val   need to change this!!!!!!!
+    "is_control": true,  //remember to comment  model.py resume =none
+    "orthogonal": false,
+    "gpu_ids": [
+        0
+    ],
+    "path": { //set the path
+        "log": "logs",
+        "tb_logger": "tb_logger",
+        "results": "eval_results",
+        "checkpoint": "checkpoint",
+        // "resume_state": "./experiments/2x_coco_240527_203413/checkpoint/I850000_E35" 
+        // "./experiments/4x_coco_240527_074939/checkpoint/I1000000_E41"
+        // "./experiments/8x_coco_240527_075154/checkpoint/I1000000_E41"//"./experiments/2x_fastmri_240508_052927/checkpoint/I2440000_E315"
+        // "resume_state": null   // need to switch this when change the val training mode
+        // "resume_state": "./experiments/4x_ci_consis_240722_053015/checkpoint/I1700000_E23"
+        "resume_state": "./finetune_new/4x/I1000000_E41" //"./finetune_new/consistency/I1000000_E11"   // "./finetune_new/multi/I810000_E9"//"./finetune_new/2x/I850000_E35"//  "./finetune_new/8x/I1000000_E41" "./finetune_new/4x/I1000000_E41" "./finetune_new/consistency/I1000000_E11" // "./finetune/2x/I850000_E35"// "./finetune/4x/I1000000_E41"//  "./finetune/8x/I1000000_E41"// "./finetune/coco4x_adamw/I1000000_E41" //"./experiments/4x_coco_240527_074939/checkpoint/I1000000_E41"// "./finetune/I1000000_E41"// "./experiments/4x_coco_adamw_240527_101226/checkpoint/I1000000_E41" // "./finetune_model/I1990000_E82"    // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+    },
+    "datasets": {
+        "train": {
+            "name": "IXI",
+            "mode": "LRHR", // whether need LR img
+            "dataroot": "../dataset/IXI_T2_train_npy_4x",// "../dataset/IXI_T2_train_npy_8x",//   "../dataset/IXI_T2/IXI_T2_train",// "../dataset/finetune_2x", //   "dataset/celebahq_16_128", //
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 16, // 4,// 16, // low resolution need to super_resolution
+            "r_resolution": 64, //32, //64, //  high resolution
+            "batch_size": 4,   //need to change here!!!!!!!!!!!
+            "num_workers": 8,
+            "use_shuffle": true,
+            "data_len": -1 // -1 represents all data used in train
+        },
+        "val": {
+            "name": "IXI",
+            "mode": "LRHR",
+            "dataroot": "../dataset/IXI_T2_val_npy_4x", //"../dataset/IXI_T2_val_npy_8x", //   "../dataset/IXI_T2_valid_npy", //"dataset/celebahq_16_128", // _Celeba
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 16,// 4, //16, //  
+            "r_resolution": 64,// 32, //64,  // 
+            "data_len": 6 // data length in validation 
+        } 
+    },
+    "model": {
+        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 6,
+            "out_channel": 3,
+            "inner_channel": 64,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                8
+            ],
+            "attn_res": [
+                16
+            ],
+            "res_blocks": 2,
+            "dropout": 0.2
+        },
+        "beta_schedule": { // use munual beta_schedule for acceleration
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            }
+        },
+        "diffusion": {
+            "image_size": 128,
+            "channels": 3, //sample channel
+            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+        }
+    },
+    "train": {
+        "n_iter":  2000000,  //1000000
+        "val_freq": 1e4,
+        "save_checkpoint_freq": 1e4,
+        "print_freq": 1e4,
+        "optimizer": {
+            "type": "adam",
+            "lr": 1e-4
+        },
+        "ema_scheduler": { // not used now
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        }
+    },
+    "wandb": {
+        "project": "sr_ffhq"
+    }
+}

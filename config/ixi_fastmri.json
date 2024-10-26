@@ -1,0 +1,121 @@
+{
+    "name": "4x_ifnocontrol_oasis", // "4xadw_test",// "4xadw_ixi_fastmri",// "8x_ixi_fast", //
+    "phase": "train", // train or val   need to change this!!!!!!!
+    "is_control": true,
+    "orthogonal": false,
+    "gpu_ids": [
+        0
+    ],
+    "path": { //set the path
+        "log": "logs",
+        "tb_logger": "tb_logger",
+        "results": "eval_results",
+        "checkpoint": "checkpoint",
+        // "resume_state": "./experiments/2x_IXI_240507_162137/checkpoint/I2420000_E144"
+        // "resume_state": null   // need to switch this when change the val training mode
+        "resume_state": "./experiments/4x_ci_240722_045205/checkpoint/I1720000_E89"  //"./experiments/4x_ci_multi_240725_040228/checkpoint/I1370000_E19" 
+        // "resume_state": "./experiments/2x_ci_240722_045716/checkpoint/I1520000_E80" 
+        //  "resume_state": "./experiments/8x_ci_240722_044533/checkpoint/I1720000_E89"// 
+
+        // "resume_state": "./experiments/2x_ci_nocontrol_240728_024500/checkpoint/I1300000_E65"
+        // "resume_state": "./experiments/8x_ci_nocontrol_240728_024151/checkpoint/I1510000_E75"
+        // "resume_state": "./experiments/4x_ci_nocontrol_240727_031440/checkpoint/I1520000_E50"
+        // "resume_state": "./experiments/4x_ci_consis_240808_174225/checkpoint/I1550000_E78" //"./experiments/4x_ci_consis_240730_033832/checkpoint/I1380000_E37" //"./experiments/4x_ci_consis_240722_053015/checkpoint/I1700000_E23"
+        
+        // "resume_state": "./experiments/4x_if_240724_054758/checkpoint/I1790000_E1023"
+        // "resume_state": "./experiments/8x_if_240724_054127/checkpoint/I1790000_E1023"
+        
+
+        // "resume_state": "./experiments/2x_i_240728_014544/checkpoint/I370000_E25"
+        // "resume_state": "./experiments/4x_i_240728_013916/checkpoint/I410000_E28"
+        // "resume_state": "./experiments/8x_i_240728_013509/checkpoint/I410000_E28"
+
+        
+        //"./experiments/2xcoco_IXI_240529_033246/checkpoint/I1610000_E86"// "./experiments/8xcoco_IXI_240528_120607/checkpoint/I1510000_E75" // "./experiments/4xcoco_IXI_240528_103558/checkpoint/I1870000_E99"  //"./experiments/4xadamwcoco_IXI_240528_104925/checkpoint/I1710000_E89"//  "./experiments/4xcoco_IXI_240528_103558/checkpoint/I1870000_E99"// "./experiments/ixi_fastmri_240515_043242/checkpoint/I2430000_E314"  // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+        // "resume_state": "/scratch/bcew/ruikez2/SR_Diffusion/baselines/SR3/experiments/2xcoco_IXI_240529_033246/checkpoint/I1610000_E86_gen.pth"//"./experiments/coco_IXI_240514_153653/checkpoint/I2410000_E143"  // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+        // "resume_state": "./experiments/4x_ixi_fastmri_240529_075950/checkpoint/I1890000_E143"
+        // "resume_state": "./experiments/8x_ixi_fast_240529_111908/checkpoint/I1540000_E141"
+        // "resume_state": "./experiments/4xadw_ixi_fastmri_240529_112336/checkpoint/I1750000_E177"
+    },
+    "datasets": {
+        "train": {
+            "name": "IXI",
+            "mode": "LRHR", // whether need LR img
+            "dataroot": "../dataset/oasis_crop_split/train_4x", //"../dataset/fastMRI/T2_npy_train_4x",//"../dataset/notumor_crop_split/train_4x/", //"../dataset/fastMRI/T2_npy_train_2x",//"../dataset/fastMRI/T2_npy_train_4x",//    "../dataset/IXI_T2/IXI_T2_train",// "../dataset/finetune_2x", //   "dataset/celebahq_16_128", //
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 64, // 32, //128, //  low resolution need to super_resolution
+            "r_resolution": 256, // high resolution
+            "batch_size": 4,  //revise
+            "num_workers": 8,
+            "use_shuffle": true,
+            "data_len": 300 // -1 // -1 represents all data used in train revise
+        },
+        "val": {
+            "name": "IXI",
+            "mode": "LRHR",
+            "dataroot": "../dataset/oasis_crop_split/val_4x",//"../dataset/fastMRI/T2_npy_test_4x", //"../dataset/notumor_crop_split/val_4x/",//"../dataset/fastMRI/T2_npy_val_4x", //  "../dataset/fastMRI/T2_npy_test_2x", // "../dataset/fastMRI/T2_npy_val_2x" //"../../dataset/fastMRI/T2_npy_sample/multicoil_T2", //"dataset/celebahq_16_128", // _Celeba
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 64, // 32, // 128, //
+            "r_resolution": 256,
+            "data_len": 6 // data length in validation //need to change in test
+        }
+    },
+    "model": {
+        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 6,
+            "out_channel": 3,
+            "inner_channel": 64,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                8
+            ],
+            "attn_res": [
+                16
+            ],
+            "res_blocks": 2,
+            "dropout": 0.2
+        },
+        "beta_schedule": { // use munual beta_schedule for acceleration
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            }
+        },
+        "diffusion": {
+            "image_size": 128,
+            "channels": 3, //sample channel
+            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+        }
+    },
+    "train": {
+        "n_iter":  2600000,  //1000000
+        "val_freq": 1e4,
+        "save_checkpoint_freq": 1e4,
+        "print_freq": 1e4,
+        "optimizer": {
+            "type": "adam",
+            "lr": 1e-4
+        },
+        "ema_scheduler": { // not used now
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        }
+    },
+    "wandb": {
+        "project": "sr_ffhq"
+    }
+}

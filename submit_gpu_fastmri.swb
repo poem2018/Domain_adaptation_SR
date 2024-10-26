@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --job-name="test_coco_fastmri"
+#SBATCH --output="slurm_logs/test_coco_fastmri.%j.out"
+#SBATCH --error="slurm_logs/test_coco_fastmri.%j.err"
+#SBATCH --mem=32g
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --gpus-per-task=1
+#SBATCH --partition=gpuA100x4      # <- or one of: gpuA100x4 gpuA40x4 gpuA100x8 gpuMI100x8
+#SBATCH --account=bcew-delta-gpu
+#SBATCH --job-name=test_coco_fastmri
+#SBATCH --time=10:00:00      
+# SBATCH --gpus-per-node=1
+##SBATCH --gpu-bind=closest
+
+source ~/.bashrc
+conda activate i2sb
+python sr.py -p val -c config/fastmri_128_256.json

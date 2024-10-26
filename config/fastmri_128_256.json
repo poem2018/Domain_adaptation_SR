@@ -1,0 +1,152 @@
+{
+    "name": "t_ifconsis", //"8x_f", //"t4x_f",
+    "phase": "val", // train or val   need to change this!!!!!!!
+    "is_control": true,  //revise
+    "orthogonal": false,
+    "gpu_ids": [
+        0
+    ],
+    "path": { //set the path
+        "log": "logs", 
+        "tb_logger": "tb_logger",
+        "results": "eval_results",
+        "checkpoint": "checkpoint",
+        // "resume_state": null
+        // "resume_state": "./finetune_new/8x/I1000000_E41"  
+        // "resume_state": "./finetune_new/2x/I850000_E35"
+        // "resume_state":  "./finetune_new/4x/I1000000_E41" //  "./finetune/coco4x/I1000000_E41"// "./finetune/coco8x/I1000000_E41"//"./finetune/coco2x/I850000_E35"//   "./finetune/coco4x_adamw/I1000000_E41" // "./experiments/4x_coco_240527_074939/checkpoint/I1000000_E41"// "./finetune/I1000000_E41"// "./experiments/4x_coco_adamw_240527_101226/checkpoint/I1000000_E41" // "./finetune_model/I1990000_E82"    // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+        
+        // "resume_state": "./experiments/c4x_if_300_240728_192714/checkpoint/I1850000_E1823"// "./experiments/c4x_if_300_240728_192714/checkpoint/I1840000_E1690"//"./experiments/c4x_if_300_240728_192714/checkpoint/I1830000_E1557"//"./experiments/4x_if_240724_054758/checkpoint/I1790000_E1023"
+        // "resume_state": "./experiments/2x_if_240724_055359/checkpoint/I1590000_E1014"
+        // "resume_state": "./experiments/c8x_if_300_240728_194125/checkpoint/I1870000_E2090"//"./experiments/c8x_if_300_240728_194125/checkpoint/I1850000_E1823"// "./experiments/8x_if_240724_054127/checkpoint/I1790000_E1023"
+        // "resume_state": "./experiments/CF/4x_cf_240722_050654/checkpoint/I1250000_E3375"//"./experiments/4x_cf_240722_050654/checkpoint/I1270000_E3641"
+        // "resume_state":"./experiments/CF/8x_cf_240722_171936/checkpoint/I1260000_E3508"// "./experiments/CF/8x_cf_240722_171936/checkpoint/I1120000_E1641" //"./experiments/CF/8x_cf_240722_171936/checkpoint/I1270000_E3641"
+        // "resume_state": "./experiments/2x_cf_240722_051334/checkpoint/I1120000_E3635"
+        // "resume_state": "./experiments/4x_ci_consis_240730_142638/checkpoint/I1530000_E2037"//"./experiments/4x_if_consis_240725_034814/checkpoint/I1870000_E590" //"./experiments/4x_if_consis_240725_034814/checkpoint/I1840000_E490"//
+        // "resume_state": "./experiments/4x_if_multi_240726_031603/checkpoint/I1570000_E686"
+        // "resume_state": //"./experiments/4x_cf_100_240728_012345/checkpoint/I1060000_E2441"
+        // "resume_state": "./experiments/8x_cf_100_240728_012809/checkpoint/I1060000_E2441"
+
+        // "resume_state": "./experiments/4x_if_30_240807_034209/checkpoint/I1820000_E12589" //"./experiments/4x_if_curve30_240727_032852/checkpoint/I1770000_E1756"  
+        // "resume_state": "./experiments/4x_if_60_240807_034820/checkpoint/I1830000_E7423"
+        // "resume_state": "./experiments/4x_if_120_240807_035021/checkpoint/I1820000_E3423"//"./experiments/4x_if_100_240727_033752/checkpoint/I1800000_E889"
+        // "resume_state": "./experiments/4x_if_200_240807_035347/checkpoint/I1830000_E2289"
+        // "resume_state": "./experiments/4x_if_500_240807_040108/checkpoint/I1830000_E969"//"./experiments/4x_if_500_240727_034825/checkpoint/I1800000_E249"
+        // "resume_state": "./experiments/4x_if_700_240807_040409/checkpoint/I1830000_E718"//"./experiments/4x_if_700_240727_035230/checkpoint/I1800000_E204" //"./experiments/4x_if_700_240727_035230/checkpoint/I1780000_E175" // "./experiments/4x_if_700_240727_035230/checkpoint/I1830000_E247"
+        // "resume_state": "./experiments/4x_if_1100_240807_040812/checkpoint/I1820000_E453"
+        // "resume_state": "./experiments/4x_if_1900_240807_041613/checkpoint/I1830000_E331"//"./experiments/4x_if_all_240727_035701/checkpoint/I1860000_E166"
+
+        // "resume_state": "./experiments/cc4x_f_240727_132738/checkpoint/I810000_E1778"// 
+        // "resume_state": "./experiments/4x_if_nocontrol_240727_132400/checkpoint/I1640000_E116"
+        // "resume_state": "./experiments/8x_if_nocontrol_240729_183810/checkpoint/I1630000_E1675"
+        // "resume_state": "./experiments/2x_if_nocontrol_240729_184225/checkpoint/I1400000_E1399"
+
+        // "resume_state": "./experiments/2x_ifonly_240729_175747/checkpoint/I480000_E1492"
+        // "resume_state": "./experiments/4x_ifonly_240729_180637/checkpoint/I500000_E1228"//"./experiments/4x_ifonly_240729_180637/checkpoint/I520000_E1495"
+        // "resume_state": "./experiments/8x_ifonly_240729_181322/checkpoint/I520000_E1495"
+
+        // "resume_state": "./experiments/4x_if_notumor_240803_023834/checkpoint/I1820000_E1423"
+        // "resume_state": "./experiments/4x_cf_notumor_240803_024252/checkpoint/I1100000_E1375"
+        // "resume_state": "./experiments/4x_ifonly_notumor_240803_024611/checkpoint/I500000_E1228"
+        // "resume_state": "./experiments/4x_ifonly_notumor_240803_024611/checkpoint/I540000_E1762"
+        // "resume_state": "./experiments/4x_ifnotumor_nocontrol_240807_033943/checkpoint/I1650000_E1784"  //this is the notumor nocontrol
+
+        // "resume_state":"./experiments/4x_if_oasis_240814_020716/checkpoint/I1850000_E1823"
+        // "resume_state": "./experiments/4x_ifnocontrol_oasis_240814_031939/checkpoint/I1660000_E1917"// "./experiments/4x_ifnocontrol_oasis_240814_031939/checkpoint/I1640000_E1650"
+        // "resume_state": "./experiments/4x_cf_oasis_240814_021720/checkpoint/I1120000_E1641"
+        // "resume_state": "./experiments/4x_ifonly_oasis_240814_023415/checkpoint/I530000_E1628" //"./experiments/4x_ifonly_oasis_240814_023415/checkpoint/I540000_E1762"
+        
+        "resume_state": "./experiments/4x_if_consis_240809_193834/checkpoint/I1650000_E1412"// "
+        // "resume_state":"./experiments/c2x_f_240730_165555/checkpoint/I470000_E1032"// "./experiments/2x_f_240730_034151/checkpoint/I230000_E505"
+        // "resume_state": "./experiments/c8x_f_240730_164924/checkpoint/I450000_E988"//"./experiments/8x_f_240730_034454/checkpoint/I220000_E483"
+
+        // "resume_state": "./experiments/cc4x_f_240727_031038/checkpoint/I710000_E1558" //"./experiments/c4x_f_240724_055726/checkpoint/I670000_E1470"//"./experiments/4x_f_240723_024353/checkpoint/I370000_E812" //null 
+        // "resume_state": "./experiments/c2x_cf_240613_013351/checkpoint/I1330000_E6436"//"./experiments/2x_if_240612_081826/checkpoint/I1730000_E1686"//"./experiments/2x_f_240611_034648/checkpoint/I70000_E934"//"./experiments/8x_cf_240612_083312/checkpoint/I1110000_E1508"//"./experiments/8x_if_240612_074539/checkpoint/I1630000_E1675"//"./experiments/4x_cf_240612_084025/checkpoint/I1120000_E1641"//"./experiments/4x_ixi_fast_700_240610_030951/checkpoint/I1980000_E728"//"./experiments/2x_coco_fastmri_240610_035114/checkpoint/I990000_E1902"//"./experiments/2x_ixi_fast_240529_215437/checkpoint/I2040000_E1029"//"./experiments/4x_ixi_fast_30_240610_031801/checkpoint/I2000000_E16349" //"./experiments/4x_fastmri_240610_032920/checkpoint/I140000_E1867"//"./experiments/4x_ixi_fast_1900_240610_031255/checkpoint/I2000000_E385"//"./experiments/4x_ixi_fast_1100_240610_031137/checkpoint/I2000000_E572"//"./experiments/4x_ixi_fast_500_240610_030846/checkpoint/I2010000_E1219"//"./experiments/4x_ixi_fast_300_240610_110215/checkpoint/I2010000_E1966"//"./experiments/4x_ixi_fast_100_240610_030614/checkpoint/I1990000_E4899" //
+        // "resume_state":"./experiments/4xcoco_IXI_240528_103558/checkpoint/I1870000_E99"
+        // "resume_state": "./experiments/c8x_8f_240613_014840/checkpoint/I460000_E6134"//"./experiments/4x_cf_240612_084025/checkpoint/I1120000_E1641"// "./experiments/c4x_f_240613_013644/checkpoint/I480000_E6401"// "./experiments/8x_f_240612_074235/checkpoint/I120000_E1600"//"./experiments/4x_fastmri_240610_032908/checkpoint/I140000_E1867"//   "./experiments/2x_coco_fastmri_240610_035114/checkpoint/I990000_E1902" // "./experiments/2x_f_240611_034648/checkpoint/I80000_E1067" // 
+          // need to switch this when change the val training mode
+        // "resume_state": "./experiments/coco_fastmri_240514_153841/checkpoint/I2190000_E1792" // "./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+        // "resume_state": "./finetune_model/I1990000_E82"  // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+    },
+    "datasets": {
+        "train": {
+            "name": "IXI",
+            "mode": "HR", // whether need LR img
+            "dataroot": "../dataset/fastMRI/T2_npy_train_4x",//"../dataset/oasis_crop_split/train_4x",// "../dataset/notumor_crop_split/train_4x/", //"../dataset/fastMRI/T2_npy_train_2x",// "../dataset/IXI_T2/IXI_T2_train",// "../dataset/finetune_2x", //   "dataset/celebahq_16_128", //
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution":  64, //64,  // 32, //  // low resolution need to super_resolution
+            "r_resolution": 256, // high resolution
+            "batch_size": 4,    //if this need revise
+            "num_workers": 8,
+            "use_shuffle": true,
+            "data_len": 300 // -1 represents all data used in train
+        },
+        "val": {
+            "name": "IXI",
+            "mode": "LRHR",
+            "dataroot":  "../dataset/fastMRI/T2_npy_test_4x", //"../dataset/oasis_crop_split/val_4x",//"../dataset/notumor_crop_split/val_4x/", //"../dataset/fastMRI/T2_npy_val_2x", // "dataset/celebahq_16_128", // _Celeba
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": 64, // 64,  //  32, // 
+            "r_resolution": 256,
+            "data_len": 60 // data length in validation 
+        } 
+    },
+    "model": {
+        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 6,
+            "out_channel": 3,
+            "inner_channel": 64,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                8
+            ],
+            "attn_res": [
+                16
+            ],
+            "res_blocks": 2,
+            "dropout": 0.2
+        },
+        "beta_schedule": { // use munual beta_schedule for acceleration
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            }
+        },
+        "diffusion": {
+            "image_size": 128,
+            "channels": 3, //sample channel
+            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+        }
+    },
+    "train": {
+        "n_iter":  3000000,  //1000000
+        "val_freq": 1e4,
+        "save_checkpoint_freq": 1e4,
+        "print_freq": 1e4,
+        "optimizer": {
+            "type": "adam",
+            "lr": 1e-4
+        },
+        "ema_scheduler": { // not used now
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        }
+    },
+    "wandb": {
+        "project": "sr_ffhq"
+    }
+}

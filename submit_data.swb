@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH --job-name="data"
+#SBATCH --output="slurm_logs/data.%j.out"
+#SBATCH --error="slurm_logs/data.%j.err"
+#SBATCH --mem=64g
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=64
+#SBATCH --gpus-per-task=1
+#SBATCH --partition=gpuA100x8      # <- or one of: gpuA100x4 gpuA40x4 gpuA100x8 gpuMI100x8
+#SBATCH --account=bcew-delta-gpu
+#SBATCH --job-name=data
+#SBATCH --time=24:00:00      
+# SBATCH --gpus-per-node=1
+##SBATCH --gpu-bind=closest
+
+source ~/.bashrc
+conda activate myenv
+python ./data/prepare_data_vlr.py 
+# python data/prepare_data_vlr.py  --n_worker 1 --path ../../dataset/CelebAMask-HQ/CelebA-HQ-img/  --out ./dataset/Celeba_2x --size 512,1024,256 
+
+

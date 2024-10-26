@@ -1,0 +1,98 @@
+{
+    "name": "4x_c_att_t_multi",  //"2x_coco", //"4x_coco_sam_adam", //"8x_coco",  //
+    "phase": "train", // train or val   need to change this!!!!!!!
+    "is_control": true,   //revise!!
+    "orthogonal": false,
+    "gpu_ids": [
+        0
+    ],
+    "path": { //set the path
+        "log": "logs",
+        "tb_logger": "tb_logger",
+        "results": "eval_results",
+        "checkpoint": "checkpoint",
+        "resume_state": "./experiments/4x_c_att_t_multi_240724_050323/checkpoint/I810000_E9" //"./experiments/4x_c_att_multi_240717_031051/checkpoint/I1040000_E11"// "./experiments/coco_4xconsis_noatt_240707_000931/checkpoint/I1000000_E11"   // need to switch this when change the val training mode
+        // "resume_state": "./experiments/4x_coco_sam_adam_240527_112431/checkpoint/I590000_E24" //"./experiments/2x_coco_240504_005250/checkpoint/I1000000_E41"// "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+    },
+    "datasets": {
+        "train": {
+            "name": "IXI",
+            "mode": "LRHR", // whether need LR img
+            "dataroot": "../dataset/COCO/train",//"../dataset/IXI_T2/IXI_T2_train",// "../dataset/finetune_2x", //   "dataset/celebahq_16_128", //
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": "random", //16, //64, //4, // // low resolution need to super_resolution
+            "r_resolution": "random", //64, //128, //32, // // high resolution
+            "batch_size": 1,  //revise
+            "num_workers": 8,
+            "use_shuffle": true,
+            "data_len": -1 // -1 represents all data used in train
+        },
+        "val": {
+            "name": "IXI",
+            "mode": "LRHR",
+            "dataroot": "../dataset/COCO/valid" , // "../dataset/COCO/test_2x", // "../dataset/COCO/test_8x" , //     "dataset/celebahq_16_128", // _Celeba
+            "datatype": "img", //lmdb or img, path of img files
+            "l_resolution": "random", // 64, // 128, //32, //
+            "r_resolution": "random", // 256,
+            "data_len": 10 // data length in validation 
+        } 
+    },
+    "model": {
+        "which_model_G": "sr3", // use the ddpm or sr3 network structure
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 6,
+            "out_channel": 3,
+            "inner_channel": 64,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                8
+            ],
+            "attn_res": [
+                16
+            ],
+            "res_blocks": 2,
+            "dropout": 0.2
+        },
+        "beta_schedule": { // use munual beta_schedule for acceleration
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 2000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2
+            }
+        },
+        "diffusion": {
+            "image_size": 128,
+            "channels": 3, //sample channel
+            "conditional": true // unconditional generation or unconditional generation(super_resolution)
+        }
+    },
+    "train": {
+        "n_iter":  6000000,  //1000000
+        "val_freq": 1e4,   //1e4
+        "save_checkpoint_freq": 1e4,  //1e4
+        "print_freq": 1e4,
+        "optimizer": {
+            "type": "adam",
+            "lr": 1e-4
+        },
+        "ema_scheduler": { // not used now
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        }
+    },
+    "wandb": {
+        "project": "sr_coco"
+    }
+}

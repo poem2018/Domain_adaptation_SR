@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name="data_pre"
+#SBATCH --output="slurm_logs/data_pre.%j.out"
+#SBATCH --error="slurm_logs/data_pre.%j.err"
+#SBATCH --mem=64g
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=64
+#SBATCH --partition=cpu      # <- or one of: gpuA100x4 gpuA40x4 gpuA100x8 gpuMI100x8
+#SBATCH --account=bcew-delta-cpu
+#SBATCH --job-name=data_pre
+#SBATCH --time=10:00:00   
+##SBATCH --gpu-bind=closest
+
+source ~/.bashrc
+conda activate myenv
+python ./data/prepare_data_vlr.py 
