@@ -16,7 +16,12 @@
         // "./experiments/8x_coco_240527_075154/checkpoint/I1000000_E41"//"./experiments/2x_fastmri_240508_052927/checkpoint/I2440000_E315"
         // "resume_state": null   // need to switch this when change the val training mode
         // "resume_state": "./experiments/4x_ci_consis_240722_053015/checkpoint/I1700000_E23"
-        "resume_state": "./finetune_new/4x/I1000000_E41" //"./finetune_new/consistency/I1000000_E11"   // "./finetune_new/multi/I810000_E9"//"./finetune_new/2x/I850000_E35"//  "./finetune_new/8x/I1000000_E41" "./finetune_new/4x/I1000000_E41" "./finetune_new/consistency/I1000000_E11" // "./finetune/2x/I850000_E35"// "./finetune/4x/I1000000_E41"//  "./finetune/8x/I1000000_E41"// "./finetune/coco4x_adamw/I1000000_E41" //"./experiments/4x_coco_240527_074939/checkpoint/I1000000_E41"// "./finetune/I1000000_E41"// "./experiments/4x_coco_adamw_240527_101226/checkpoint/I1000000_E41" // "./finetune_model/I1990000_E82"    // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
+        "resume_state": "./finetune_new/4x/I1000000_E41" 
+        //"./finetune_new/consistency/I1000000_E11"   
+        // "./finetune_new/multi/I810000_E9"
+        //"./finetune_new/2x/I850000_E35"
+        //  "./finetune_new/8x/I1000000_E41" 
+        //"./finetune_new/4x/I1000000_E41"  
     },
     "datasets": {
         "train": {

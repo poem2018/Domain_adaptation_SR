@@ -13,15 +13,6 @@ import os
 import torch
 # from share import *
 
-## python tool_add_control.py -i ./experiments/val_8x_zssr_16_128_240215_030646/checkpoint/I970000_E108 -o ./finetune_model/I970000_E108 -c ./config/zssr_16_128.json
-## python tool_add_control.py -i ./experiments/val_finetune_2x_256_512_240215_030756/checkpoint/I480000_E76 -o ./finetune_model/I480000_E76 -c ./config/zssr_256_512.json
-
-#python tool_add_control.py -i ./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68 -o ./finetune_model/I1000000_E68  -c ./config/IXI_128_256.json
-# python tool_add_control.py -i ./experiments/2x_coco_contin_240505_123440/checkpoint/I1990000_E82 -o ./finetune_model/I1990000_E82  -c ./config/coco_128_256.json
-# python tool_add_control.py -i ./experiments/coco_IXI_240514_153653/checkpoint/I2410000_E143 -o ./finetune_model/I2410000_E143  -c ./config/IXI_64_128.json
-
-##I don't need to do second control net for ixi-fastmri finetune????
-
 # 4x coco-ixi
 # python tool_add_control.py -i ./experiments/2x_coco_240527_203413/checkpoint/I850000_E35 -o ./finetune_new/2x/I850000_E35  -c ./config/coco_128_256.json
 # python tool_add_control.py -i ./experiments/4x_coco_240527_074939/checkpoint/I1000000_E41 -o ./finetune_new/4x/I1000000_E41  -c ./config/coco_128_256.json

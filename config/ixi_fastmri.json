@@ -30,12 +30,6 @@
         // "resume_state": "./experiments/4x_i_240728_013916/checkpoint/I410000_E28"
         // "resume_state": "./experiments/8x_i_240728_013509/checkpoint/I410000_E28"
 
-        
-        //"./experiments/2xcoco_IXI_240529_033246/checkpoint/I1610000_E86"// "./experiments/8xcoco_IXI_240528_120607/checkpoint/I1510000_E75" // "./experiments/4xcoco_IXI_240528_103558/checkpoint/I1870000_E99"  //"./experiments/4xadamwcoco_IXI_240528_104925/checkpoint/I1710000_E89"//  "./experiments/4xcoco_IXI_240528_103558/checkpoint/I1870000_E99"// "./experiments/ixi_fastmri_240515_043242/checkpoint/I2430000_E314"  // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
-        // "resume_state": "/scratch/bcew/ruikez2/SR_Diffusion/baselines/SR3/experiments/2xcoco_IXI_240529_033246/checkpoint/I1610000_E86_gen.pth"//"./experiments/coco_IXI_240514_153653/checkpoint/I2410000_E143"  // "./finetune_model/I1000000_E68" //"./experiments/2x_IXI_240424_234312/checkpoint/I1000000_E68"
-        // "resume_state": "./experiments/4x_ixi_fastmri_240529_075950/checkpoint/I1890000_E143"
-        // "resume_state": "./experiments/8x_ixi_fast_240529_111908/checkpoint/I1540000_E141"
-        // "resume_state": "./experiments/4xadw_ixi_fastmri_240529_112336/checkpoint/I1750000_E177"
     },
     "datasets": {
         "train": {
