@@ -38,7 +38,7 @@ class PositionalEncoding(nn.Module):
         return encoding
 
 
-##revise for multi####
+##revise for multi scale####
 # class PositionalEncoding(nn.Module):
 #     def __init__(self, dim):
 #         super().__init__()
